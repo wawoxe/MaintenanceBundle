@@ -1,0 +1,14 @@
+parameters:
+  app.maintenance.enabled: true
+  app.maintenance.priority: 1000
+
+services:
+  maintenance_response:
+    class: Wawoxe\MaintenanceBundle\Response\DefaultResponse
+
+  Wawoxe\MaintenanceBundle\EventListener\MaintenanceListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, priority: '%app.maintenance.priority%' }
+    arguments:
+      - '@maintenance_response'
+      - '%app.maintenance.enabled%'

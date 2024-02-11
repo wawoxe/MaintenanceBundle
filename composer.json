@@ -3,7 +3,7 @@
   "description": "Maintenance mode feature for Symfony application.",
   "type": "symfony-bundle",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "autoload": {
     "psr-4": {
       "Wawoxe\\MaintenanceBundle\\": "src/"
