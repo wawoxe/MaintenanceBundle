@@ -1,0 +1,25 @@
+{
+  "name": "wawoxe/maintenance-bundle",
+  "description": "Maintenance mode feature for Symfony application.",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "version": "0.0.1",
+  "autoload": {
+    "psr-4": {
+      "Wawoxe\\MaintenanceBundle\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Mykyta Melnyk",
+      "email": "wawoxe@proton.me"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">= 8.3",
+    "symfony/http-kernel": ">=7.0"
+  },
+  "require-dev": {
+  }
+}
