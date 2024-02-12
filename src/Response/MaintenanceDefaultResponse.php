@@ -17,12 +17,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 
 /**
- * This is maintenance Response example. You can return Symfony responses conditionally with checking Request variables.
+ * MaintenanceDefaultResponse class.
+ *
+ * Concrete implementation of the MaintenanceResponseInterface interface.
+ * Generates maintenance responses based on the request format.
  *
  * @author Mykyta Melnyk <wawoxe@proton.me>
  */
-final class DefaultResponse implements ResponseInterface
+final class MaintenanceDefaultResponse implements MaintenanceResponseInterface
 {
+    /**
+     * Get maintenance response.
+     *
+     * Generates a maintenance response based on the given request format.
+     * Supports HTML and JSON formats.
+     *
+     * @param Request $request The request for which the response is generated
+     *
+     * @return Response The maintenance response
+     *
+     * @throws UnsupportedMediaTypeHttpException When an unsupported content type is encountered
+     */
     public function getResponse(Request $request): Response
     {
         return match ($request->getRequestFormat()) {
