@@ -14,29 +14,32 @@ composer require wawoxe/maintenance-bundle
 
 After installation, you need to configure MaintenanceBundle in your Symfony application. Here's an example configuration:
 
+```shell
+# Set up environment in Docker or Nginx/Apache.
+MAINTENANCE_MODE=true
+# Optional
+MAINTENANCE_PRIORITY=1000
+# Or run Symfony with MAINTENANCE_MODE
+MAINTENANCE_MODE=true symfony serve
+```
+
+**Optional:** set your own class responsible for generating maintenance responses.
+
 ```yaml
 # config/services.yaml
 
-parameters:
-  # Set to true to enable maintenance mode, false otherwise.
-  app.maintenance.enabled: true
-  # Determines the order in which event listeners are executed.
-  app.maintenance.priority: 1000
-
-# [optional]
 services:
-  maintenance_response:
-    # Set your own class responsible for generating maintenance responses.
+  maintenance.response:
     class: Wawoxe\MaintenanceBundle\Response\MaintenanceDefaultResponse
 ```
 
-This configuration enables maintenance mode and specifies the priority of the maintenance event listener. You can customize the maintenance response by modifying the `maintenance_response` service definition.
+This configuration enables maintenance mode and specifies the priority of the maintenance event listener. You can customize the maintenance response by modifying the `maintenance.response` service definition.
 
 ## Usage
 
 Once configured, MaintenanceBundle will automatically handle maintenance mode for your Symfony application. When maintenance mode is enabled and a request is received, the maintenance listener will intercept the request and apply the maintenance response based on the request format.
 
-You can customize the maintenance response by creating a custom class that implements the `MaintenanceResponseInterface`. Then, update the service definition for `maintenance_response` to use your custom class.
+You can customize the maintenance response by creating a custom class that implements the `MaintenanceResponseInterface`. Then, update the service definition for `maintenance.response` to use your custom class.
 
 ## Testing
 

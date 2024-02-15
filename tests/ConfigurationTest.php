@@ -39,12 +39,12 @@ class ConfigurationTest extends TestCase
         $container = $this->loadContainer();
 
         // Assert that 'maintenance_response' service is registered
-        $this->assertTrue($container->has('maintenance_response'));
+        $this->assertTrue($container->has('maintenance.response'));
 
         // Assert that 'maintenance_response' service implements MaintenanceResponseInterface
         $this->assertInstanceOf(
             MaintenanceResponseInterface::class,
-            $container->get('maintenance_response')
+            $container->get('maintenance.response')
         );
 
         // Assert that 'MaintenanceListener' service is registered

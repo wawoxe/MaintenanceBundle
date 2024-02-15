@@ -4,26 +4,28 @@
 parameters:
   # Indicates whether maintenance mode is enabled.
   # Set to true to enable maintenance mode, false otherwise.
-  app.maintenance.enabled: true
+  env(MAINTENANCE_MODE): false
+  maintenance.mode: '%env(bool:MAINTENANCE_MODE)%'
 
   # Priority of the maintenance event listener.
   # Determines the order in which event listeners are executed.
-  app.maintenance.priority: 1000
+  env(MAINTENANCE_PRIORITY): 1000
+  maintenance.priority: '%env(int:MAINTENANCE_PRIORITY)%'
 
 services:
   # Maintenance response service definition.
-  maintenance_response:
+  maintenance.response:
     # Class responsible for generating maintenance responses.
     class: Wawoxe\MaintenanceBundle\Response\MaintenanceDefaultResponse
 
   # Maintenance event listener service definition.
   Wawoxe\MaintenanceBundle\EventListener\MaintenanceListener:
     # Tags the service as an event listener for the 'kernel.request' event.
-    # The listener's priority is determined by the value of 'app.maintenance.priority'.
+    # The listener's priority is determined by the value of 'maintenance.priority'.
     tags:
-      - { name: kernel.event_listener, event: kernel.request, priority: '%app.maintenance.priority%' }
+      - { name: kernel.event_listener, event: kernel.request, priority: '%maintenance.priority%' }
     # Constructor arguments for the maintenance event listener.
-    # Injects the maintenance response service and the value of 'app.maintenance.enabled'.
+    # Injects the maintenance response service and the value of 'maintenance.mode'.
     arguments:
-      - '@maintenance_response'
-      - '%app.maintenance.enabled%'
+      - '@maintenance.response'
+      - '%maintenance.mode%'
